@@ -17,20 +17,15 @@ class Header extends React.Component {
     });
   }
 
-  handleClick(e) {
-    console.log(e);
-    var userTab = e;
-    this.props.onHeader(userTab);  
-  }
-
+  
   render() { 
       return (
               <div className="header">
                 <span>Hello React!</span> 
                 {this.props.name}
                 <ul className="clearfix"> 
-                  {this.state.tabs.map(item => (
-                    <li onClick={this.handleClick.bind(this, item)}>{item}</li>
+                  {this.state.tabs.map((item, index) => (
+                    <li key={index} onClick={() => this.props.onHeader(item)}>{item}</li>
                   ))}
                 </ul>
               </div> 
