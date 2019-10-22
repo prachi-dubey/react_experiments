@@ -1,0 +1,47 @@
+$blue: #23527F;
+
+.wrapper {
+  .caption {
+    padding: 0 5px;
+
+      h3 {
+        font-size: 22px;
+        height: 50px;
+        margin: 0 0 5px 5px;
+        overflow: hidden;
+      }
+
+      > div {
+        height: 45px;
+        margin-bottom: 5px;
+        overflow: hidden;
+      }
+
+      .style {
+        display: flex;
+        justify-content: center;
+      }
+    }
+    .img-style {
+      margin-top: 20px;
+      .book-img {
+        // display: block;
+        // height: 200px;
+        // margin: auto;
+        width: 170px;
+      }
+    }
+    .loading-wrapper {    
+      left: -110px;
+      position: relative;
+      top: 40px;
+
+      > div {
+        color: $blue;
+        font-size: 50px;
+        left: 55%;
+        position: absolute;
+        top: 50%;
+      }
+    }
+  }
