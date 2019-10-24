@@ -12,9 +12,8 @@ export default class Sidebar extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
   } 
-
-  handleClick(e) { 
-    console.log('i am in sidebar ' + e);
+  
+  handleClick = (e) => { 
     this.props.onBookName(e);
   }
 

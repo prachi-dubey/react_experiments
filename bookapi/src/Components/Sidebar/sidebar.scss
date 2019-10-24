@@ -1,20 +1,17 @@
 $lightpink: #ffc0cb;
 
 .side-nav {
-
-    li:hover {   /* mouse over link */
-      background-color: $lightpink;
-    }
-
-    .left {
-      background-color: #d3d3d31f;
-      border: 1px solid #a9a0a038;
-      border-radius: 5px;
-      float: left;
-      list-style-type: none;
-      padding: 0;
-      width: 90%;
-
+  li:hover {   /* mouse over link */
+    background-color: $lightpink;
+  }
+  .left {
+    background-color: #d3d3d31f;
+    border: 1px solid #a9a0a038;
+    border-radius: 5px;
+    float: left;
+    list-style-type: none;
+    padding: 0;
+    width: 90%;
       .data {
         border-bottom: 1px solid #a9a0a038;
         padding: 15px 0;
