@@ -1,3 +1,23 @@
 .bookapi {
   margin: 0;
 }
+
+$myColor: #ffc0cb;
+
+.navbar {
+  .book-api {
+    color: $myColor;
+    font-size: 40px;   
+  }
+
+  .nav-tabs {
+    border: none;
+  }
+  
+  li {
+    background-color: white;
+    margin: 12px 10px 0 0;
+    min-width: 70px;  
+    text-align: center;
+  }
+}

@@ -69,7 +69,7 @@ export class LoginForm extends React.Component {
       <div className="container">
         <div className="row">
           <div className="col-sm-10">
-            <h1>Login Form</h1>
+            <h1>User Enter Data</h1>
           </div>
         </div>
         <div className="row">

@@ -4,11 +4,6 @@ import './header.scss';
 export default class Header extends React.Component { 
   constructor(props) {
     super(props);
-
-    this.state = {
-      tabs: ['Java', 'Oracle', 'Php', 'Mysql','Css'],
-    };
-
     this.handleNavClick = this.handleNavClick.bind(this);
   } 
 
