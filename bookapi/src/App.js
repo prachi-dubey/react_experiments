@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';  
 // import Header from './Components/Header/header.jsx';
 import Sidebar from './Components/Sidebar/sidebarContainer.jsx';
 import BookList from './Components/BookDetails/bookList.jsx';
@@ -13,8 +13,10 @@ import {
   NavLink,
   useRouteMatch,
   useParams,
+  withRouter,
   useHistory
 } from "react-router-dom";
+
 
 export default class App extends React.Component {
   constructor() {
@@ -51,7 +53,7 @@ export default class App extends React.Component {
     });  
   }
   
-  render() {   
+  render() {  
     return (
     <Router>
       <div className="App">
@@ -62,43 +64,36 @@ export default class App extends React.Component {
             </div>
             <div className="pull-right">
               <ul className="nav nav-tabs">
-                <li><NavLink to="/Book/" >Book</NavLink></li>
-                <li><NavLink to="/UserFiled" >UserFiled</NavLink></li>
+                <li><NavLink to="/Book" >Book</NavLink></li>
+                <li><NavLink to="/UserField" >UserField</NavLink></li>
                 <li><NavLink to="/UserTable" >UserTable</NavLink></li>
               </ul>
             </div>
-          </nav>
-          
+          </nav>        
 
-          <Switch>
-            <Route path="/UserFiled">
-             <div className="col-md-6 col-md-offset-3"> 
-               <LoginForm onUserData={this.getUserData }/>    
-             </div>
-            </Route>
-            <Route path="/UserTable">
-              <UserDetails userData={this.state.storeUserData}/>
-            </Route>   
+          {/* <Switch> */}
+              <Route path="/UserField" 
+                render={(props) => <LoginForm {...props} onUserData={this.getUserData }/>}   
+              />
+    
+              <Route path="/UserTable" 
+                render={(props) => <UserDetails {...props} userData={this.state.storeUserData}/>} 
+              />
+               
+            
             <Route path="/Book/">
               <div> 
                 <div className="col-sm-3"> 
-                  <Sidebar onBookName={this.getBookName} />
-                  <Route path="/:id" children={<Child />}/>
+                  <p> hello {this.state.bookName}</p>
+                  <Sidebar onBookName={this.getBookName}/>  
+                   
                 </div>
                 <div className="col-sm-9">
                   <BookList bookNameForApi={this.state.bookName}/>
-                </div>
-
-                {/* <div className="col-sm-3"> 
-                  <Sidebar onBookName={this.getBookName} Route path="/:id" children={<Child />}/>
-                </div> 
-                <div className="col-sm-9">
-                  <BookList bookNameForApi={this.state.bookName}/>
-                </div> */}
+                </div>   
               </div>
             </Route>
-          </Switch>
-
+          {/* </Switch> */}
         </div>    
       </div>
     </Router>
@@ -118,5 +113,14 @@ function Child() {
       <h3>ID: {id}</h3>    
     </div>  
   );
-}
+} 
+
+
+
+ {/* <div className="col-sm-3"> 
+                  <Sidebar onBookName={this.getBookName} Route path="/:id" children={<Child />}/>
+                </div> 
+                <div className="col-sm-9">
+                  <BookList bookNameForApi={this.state.bookName}/>
+                </div> */}
 

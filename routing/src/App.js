@@ -17,9 +17,9 @@ export default class App extends React.Component {
       <div className="App">
         <div className="container">
           <ul className="nav">
-            <li className="btn btn-light tabActive"><NavLink to="/home" activeStyle={{color:'green'}}>Home </NavLink></li>
-            <li className="btn btn-light tabActive"><NavLink to="/about" activeStyle={{color:'green'}} >About </NavLink></li>
-            <li className="btn btn-light tabActive"><NavLink to="/test" activeStyle={{color:'green'}}> Test</NavLink></li>
+            <li className="btn btn-light tab-active"><NavLink to="/home" activeStyle={{color:'green'}}>Home </NavLink></li>
+            <li className="btn btn-light tab-active"><NavLink to="/about" activeStyle={{color:'green'}} >About </NavLink></li>
+            <li className="btn btn-light tab-active"><NavLink to="/test" activeStyle={{color:'green'}}> Test</NavLink></li>
           </ul> 
 
           <Route path="/home"  component={Home}/>

@@ -66,7 +66,7 @@ export class LoginForm extends React.Component {
   
   render() {
     return (
-      <div className="container">
+      <div className="col-md-6 col-md-offset-3">
         <div className="row">
           <div className="col-sm-10">
             <h1>User Enter Data</h1>
@@ -96,7 +96,7 @@ export class LoginForm extends React.Component {
                 <div className="form-group">
                   <label htmlFor="firstname">First Name</label>
                   <Field type="text" name="firstname" 
-                  className={`form-control form-width ${
+                  className={`form-control ${
                     touched.firstname && errors.firstname ? "is-invalid" : ""
                   }`} />
                   <ErrorMessage component="div" name="firstname"
@@ -106,7 +106,7 @@ export class LoginForm extends React.Component {
                 <div className="form-group">
                   <label htmlFor="lastname">Last Name</label>
                   <Field type="text" name="lastname" 
-                  className={`form-control form-width ${
+                  className={`form-control ${
                     touched.lastname && errors.lastname ? "is-invalid" : ""
                   }`} />
                   <ErrorMessage component="div" name="lastname"
@@ -116,7 +116,7 @@ export class LoginForm extends React.Component {
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
                   <Field type="email" name="email" 
-                  className={`form-control form-width ${
+                  className={`form-control ${
                     touched.email && errors.email ? "is-invalid" : ""
                   }`} />
                   <ErrorMessage component="div" name="email"
@@ -126,7 +126,7 @@ export class LoginForm extends React.Component {
                 <div className="form-group">
                   <label htmlFor="mobile">Mobile</label>
                   <Field type="text" name="mobile" 
-                  className={`form-control form-width ${
+                  className={`form-control ${
                     touched.mobile && errors.mobile ? "is-invalid" : ""
                   }`} />
                   <ErrorMessage component="div" name="mobile"
