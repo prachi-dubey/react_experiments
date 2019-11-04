@@ -1,20 +1,14 @@
 import React, { useState } from 'react';  
 // import Header from './Components/Header/header.jsx';
 import Sidebar from './Components/Sidebar/sidebarContainer.jsx';
-import BookList from './Components/BookDetails/bookList.jsx';
+// import BookList from './Components/BookDetails/bookList.jsx';
 import {LoginForm} from './Components/LoginForm/loginForm.jsx';
 import UserDetails from './Components/Userdetail/UserTable.jsx';
 import './App.scss'; 
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
-  Link,
   NavLink,
-  useRouteMatch,
-  useParams,
-  withRouter,
-  useHistory
 } from "react-router-dom";
 
 
@@ -44,6 +38,11 @@ export default class App extends React.Component {
         storeUserData: joined
       });  
   }
+
+  componentWillMount = () => {
+    this.getBookName();
+    console.log("componentWillMount ");  
+  } 
 
   getBookName = (e) => {
     console.log('onBookName :' + e);
@@ -81,17 +80,17 @@ export default class App extends React.Component {
               />
                
             
-            <Route path="/Book/">
+            <Route path="/Book">
               <div> 
-                <div className="col-sm-3"> 
+                {/* <div className="col-sm-3">  */}
                   <p> hello {this.state.bookName}</p>
                   <Sidebar onBookName={this.getBookName}/>  
                    
-                </div>
-                <div className="col-sm-9">
+                {/* </div> */}
+                {/* <div className="col-sm-9">
                   <BookList bookNameForApi={this.state.bookName}/>
-                </div>   
-              </div>
+                </div> */}   
+              </div> 
             </Route>
           {/* </Switch> */}
         </div>    
@@ -100,22 +99,6 @@ export default class App extends React.Component {
     ); 
   }   
 } 
-
-function Child() {
-  
-  let { id } = useParams();
-  let { path, url } = useRouteMatch();
-  console.log("path : " + path);
-  console.log("url : " + url);
-  
-  return (
-    <div>
-      <h3>ID: {id}</h3>    
-    </div>  
-  );
-} 
-
-
 
  {/* <div className="col-sm-3"> 
                   <Sidebar onBookName={this.getBookName} Route path="/:id" children={<Child />}/>

@@ -16,9 +16,9 @@ export default class BookList extends React.Component {
   } 
 
   getBooksDetails = (options) => {
-    if(!options.subName) {
-      options.subName = "JAVA";
-    }
+    // if(!options.subName) {
+    //   options.subName = "JAVA";
+    // }
     API.get(options.subName).then(res => {
       this.setState({ 
         books: (res && res.data && res.data.books) ? res.data.books : []

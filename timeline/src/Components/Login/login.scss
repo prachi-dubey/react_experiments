@@ -1,0 +1,38 @@
+
+$white-smoke: #f1f1f1;
+$grey: #ccc;
+$grey2: #716969;
+$green: #4CAF50;
+$blue: #6ec0fb;
+$black: #333;
+$ipad: 768px;
+$ipad2: 991px;
+
+.login {
+  margin: auto;
+  margin-top:20px;
+  h4{
+    color: $blue;
+    text-align: center;
+  }
+
+  form { 
+    button {
+      background-color: $green;
+      border: none;
+      color: white;
+      cursor: pointer;
+      margin: 8px 0;
+      padding: 14px 20px;
+    }
+    button:hover {
+      opacity: 0.8;
+    }
+  } 
+  .right{
+    float: right;
+  }
+  
+} 
+
+
