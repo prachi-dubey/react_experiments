@@ -1,0 +1,53 @@
+
+$white-smoke: #f1f1f1;
+$blue: #6ec0fb;
+$error-color: #f44336;
+
+.signup {
+  margin: auto;
+  margin-top: 20px;
+  h4 {
+    color: $blue;
+    text-align: center;
+  }
+
+  form { 
+    .dp-style {
+      display: inline-block;
+      width: 100px;
+    }
+
+    .inline {
+      display:inline;
+    }
+
+    .name {
+      margin-top: 15px;
+      input {
+        text-transform: capitalize;
+      }
+    }
+
+    .checkbox {
+      margin-top: 0;
+      input {
+        margin-right: 10px;
+      }
+    }
+
+    .dp-style {
+      input {
+        margin-right: 10px;
+      }
+    } 
+
+    .input-width {
+      width:40%
+    }
+    
+    .invalid-feedback {
+      color: $error-color;
+      display: block;
+    }
+  } 
+}
