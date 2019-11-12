@@ -9,14 +9,10 @@ export default function App () {
     <Router>
       <div className="App">
         <div className="container-fluid">
-          <Header /> 
-          <Container />          
+          <Header />
+          <Container /> 
         </div> 
       </div>
     </Router>  
   );   
-}  
-
-
-
-
+}   

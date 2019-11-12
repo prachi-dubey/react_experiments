@@ -28,51 +28,39 @@ export class Signup extends React.Component {
   getUserData = (values) => {
     // localStorage.removeItem("PersonDetail");       // all comments part is now for testing
     localStorage.setItem('UserData', "hello");
-    // this.props.onUserData(values); 
     var dataCheck = JSON.parse(localStorage.getItem('PersonDetail'));
-    // console.log(dataCheck);
     if(!dataCheck) {
       dataCheck = [];
     }
     dataCheck.push(values);
     console.log(dataCheck); 
-    localStorage.setItem('PersonDetail', JSON.stringify(dataCheck));
-    // const test = JSON.parse(localStorage.getItem('PersonDetail')); 
-    // console.log(test);    
+    localStorage.setItem('PersonDetail', JSON.stringify(dataCheck));  
   } 
 
-  focusTextInput = (e) => { 
-    console.log(this.textInput);
-    
-    // var value = textInput.current.value;     // comments  code is working
-    let value = this.textInput.current.value;
+  focusTextInput = () => { 
+    var value = this.textInput.current.value;
     if(value.length <= 12) { 
-      if(value.length === 4 ) {   
+      if(value.length === 3 ) {   
         value = value.concat( '-' );  
-        // textInput.current.value = value;
         this.textInput.current.value = value;
       }
       if(value.length === 8 ) {   
         value = value.concat( '-' );
-        // textInput.current.value = value;
         this.textInput.current.value = value;  
-      }
-      console.log(value);
-      // console.log(textInput.current.value);
+      } 
     } else {
-      // textInput.current.value = textInput.current.value.substr(0, 12);
-      this.textInput  .current.value = value.substr(0, 12);
+      this.textInput.current.value = value.substr(0, 12);
     }   
   } 
-
-  userDataValidation = (values , errors ) => { 
+  
+  userDataValidation = (values, errors ) => {
     const emailTest = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     const nameTest = /^[a-zA-Z]+$/;
-    const mobileTest = /^[0-9]{10}$/;
+    const mobileTest = /^\d{3}-\d{4}-\d{3}$/;
 
     if ((values.firstname  === "") && (values.firstname.length === 0)) {
-        errors.firstname = "FirstName is required";
-      } else if (!nameTest.test(values.firstname)) {
+       errors.firstname = "FirstName is required";
+    } else if (!nameTest.test(values.firstname)) {
         errors.firstname = "Characters only";
     }
     if (values.lastname === "") {
@@ -90,7 +78,7 @@ export class Signup extends React.Component {
       errors.password = "password is required";
     } 
 
-    if (values.mobile === "") {
+    if (values.mobile === "") {   
       errors.mobile = "Mobile number is required";
     } else if (!mobileTest.test(values.mobile)){   
       errors.mobile = "Mobile should be number and 10 digits only";
@@ -114,30 +102,29 @@ export class Signup extends React.Component {
     <div className="col-md-6 col-md-offset-4 signup">
       <h4>Signup form</h4>
       <Formik 
+        enableReinitialize
         initialValues={this.state.userData} 
-        validate={(values) => {
-          let errors = {};
-          this.userDataValidation(values , errors );
-          return errors;
+        validate={(values) => { let errors = {};
+          values.mobile = this.textInput.current.value;
+          this.userDataValidation(values, errors);
+          return  errors;         
         }}
         onSubmit={(values, {setSubmitting, resetForm}) => { 
           alert("form submitted");  
           console.log(values);
-          // this.getUserData(values);
+          this.getUserData(values);
           resetForm({firstname:'', lastname:'', email:'', password:'',
             mobile: '', gender:'', profile:'', skills:[]
           });  
           setSubmitting(false);
         }} 
       >
-        {({ touched, errors, isSubmitting}) => (
+        {({ touched, errors }) => (
         <Form> 
           <Field name="firstname" label="firstname" component={TextField} />
           <Field name="lastname" label="lastname" component={TextField} />
           <Field name="email" label="email" component={TextField} /> 
           <Field name="password" label="password" component={TextField}/> 
-          {/* <Field name="mobile" label="mobile" component={TextField} /> */}
-
           <Field name="profile" options={[
             { value: 'Software Developer', label: 'Software Developer' },
             { value: 'Tester', label: 'Tester' },
@@ -148,10 +135,11 @@ export class Signup extends React.Component {
           
           <div className="form-group"> 
             <label htmlFor="mobile" className="dp-style" >Mobile</label>
-            <Field name="mobile" label="mobile" component={CustomMobileInput} 
-              // ref={textInput} 
-              ref={this.textInput}  keyUpEvent={this.focusTextInput}
-              className={` dp-style input-width ${ touched.mobile && errors.mobile ? "is-invalid" : ""}`}
+            <Field name="mobile" label="mobile"
+              render={() => 
+                <CustomMobileInput ref={this.textInput} keyUpEvent={this.focusTextInput}
+                className={` dp-style input-width ${ touched.mobile && errors.mobile ? "is-invalid" : ""}`}/>
+              } 
             /> 
             <ErrorMessage component="div" name="mobile" className="invalid-feedback"/>
           </div>            
@@ -168,8 +156,7 @@ export class Signup extends React.Component {
                 className={`${ touched.gender && errors.gender ? "is-invalid" : ""}`}/>
               <label>Female</label>
             </div>
-            <ErrorMessage component="div" name="gender"
-              className="invalid-feedback"/>
+            <ErrorMessage component="div" name="gender"className="invalid-feedback"/>
           </div>          
 
           <div value="" className={`form-group ${ touched.skills && errors.skills ? "is-invalid" : ""}`}>
@@ -207,8 +194,7 @@ function Checkbox(props) {
   );
 } 
 
-// const textInput = React.createRef();
 const CustomMobileInput = React.forwardRef((props, ref) =>  ( 
-  <> <ref /> <input type="text" ref={ref} onKeyUp={() => props.keyUpEvent()} /> </>
+  <> <input type="text" ref={ref} onKeyUp={() => props.keyUpEvent()} /> </>
   )
 );

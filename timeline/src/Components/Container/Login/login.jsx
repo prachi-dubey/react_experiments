@@ -4,6 +4,15 @@ import { Formik, Form, Field } from "formik";
 import { TextField } from "material-ui-formik-components/TextField";
 
 export class Login extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      loginData: {        
+        email: "", 
+        password: "",       
+      }
+    }
+  } 
  
   loginDataValidation = (touched , errors) => { 
     const emailTest = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -15,7 +24,6 @@ export class Login extends React.Component {
     }
 
     if (touched.password === "") {
-      // console.log(values.password );
       errors.password = "password is required";
     } 
   }
@@ -25,41 +33,23 @@ export class Login extends React.Component {
       <div className="col-md-4 col-md-offset-4 login">
         <h1>Login form</h1>
         <Formik
-           initialValues={{
-            email: "",
-            password: ""
-          }}
-          validate={touched => {
+          initialValues = { this.state.loginData } 
+          validate={ touched => {
             let errors = {};
             this.loginDataValidation(touched , errors);
             return errors;
           }}
           onSubmit={(values, {setSubmitting, resetForm}) => {
-            resetForm({email:'',
-              password:''
-            });  
+            resetForm( this.state.loginData );  
             setSubmitting(false);  
             this.props.onLoginData(values);         
           }}          
         >
-           {({ props,touched, errors, isSubmitting  }) => (
+          {({ props,touched, errors, isSubmitting  }) => (
             <Form>
-              <Field           
-                name="email"
-                label="email"
-                component={TextField} 
-              />
-
-              <Field
-                // required
-                name="password"
-                label="password"
-                component={TextField}
-              /> 
-
-              <button type="submit"> 
-                Submit
-              </button>
+              <Field  name="email" label="email" component={TextField} />
+              <Field name="password" label="password" component={TextField} />
+              <button type="submit">  Submit </button>
             </Form>
           )}
         </Formik> 
