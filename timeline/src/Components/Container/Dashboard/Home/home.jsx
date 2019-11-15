@@ -14,7 +14,6 @@ const useStyles1 = makeStyles(theme => ({
 
 export default function Home() {
   const classes = useStyles1();
-  console.log(" comming in home ");
   return (   
     <div> 
       <Card >

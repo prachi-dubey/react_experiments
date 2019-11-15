@@ -12,8 +12,26 @@ export class Login extends React.Component {
         password: "",       
       }
     }
+  }  
+
+  componentDidMount = () => {  
+    const userDetails = JSON.parse(localStorage.getItem('PersonDetail'));
+    for (var i = 0; i < userDetails.length; i++) {
+      console.log(userDetails[i].isLoggedIn); 
+      if(userDetails[i].isLoggedIn) {
+        this.setState({
+          loginData: {
+            email: userDetails[i].email,
+            password: userDetails[i].password
+          }         
+        }, () => {
+          console.log(this.state.loginData);        
+          this.props.onLoginData(this.state.loginData);
+        });
+      }
+    } 
   } 
- 
+
   loginDataValidation = (touched , errors) => { 
     const emailTest = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 

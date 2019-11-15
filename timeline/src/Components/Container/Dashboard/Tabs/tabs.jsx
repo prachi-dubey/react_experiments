@@ -7,7 +7,11 @@ import {AppBar, Tabs, Tab} from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   header: { marginTop: 15 },
-  tabWidth: { minWidth: 231 }
+  tabWidth: { minWidth: 231 , 
+    [theme.breakpoints.down('xs')]: {
+      minWidth: 25
+    }
+  }
 })); 
 
 const AntTabs = withStyles({

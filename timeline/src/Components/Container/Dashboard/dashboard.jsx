@@ -5,14 +5,14 @@ import mountain from "../../../assets/mountain.jpg";
 import whiteDaisy from "../../../assets/White-Daisy.jpg";
 import {Typography, Grid, Avatar, Card, CardActionArea, CardActions , CardContent} from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
-import { BrowserRouter as Router,Route, Switch} from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 
 class Dashboard extends React.Component { 
   render() {
-    console.log("comming in dashboard");  
     return (
       <React.Fragment> 
-        <Switch>       
+        <Switch> 
+          {/* <Route path="/dashboard" component={Dashboard} />        */}
           <Route  path="/dashboard" component={WebPage}/> 
         </Switch>
       </React.Fragment> 
@@ -26,25 +26,34 @@ const useStyles = makeStyles(theme => ({
   container: { marginTop: 20 },
   header: { marginTop: 15, },
   mounatin: { height: 140, width: '100%', position: 'relative'},
-  whiteDaisy: { height: 60.54, width: 60, position: 'absolute', top:198, left: "10.5%"},
+  whiteDaisy: { height: 60.54, width: 60, position: 'absolute', top: 198, left: "10.5%" ,
+    [theme.breakpoints.down('xs')]: {
+      top: 185,
+      left: "42%"
+    }
+  },
   card: { maxWidth: 345, textAlign: 'center'},
   media: { height: 140},
+  postComment: { 
+    marginLeft: 20,
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: 50
+    }
+  }
 }));
     
 const WebPage = () => {
   const classes = useStyles(); 
-  console.log("comming in webpage");
-  
   return ( 
     <div>
       <Grid className= {classes.container} container spacing={2}>
-        <Grid item xs={3} sm={3}>
+        <Grid item xs={12} sm={3}>
           <img className= {classes.mounatin} src={mountain} alt="mountain"/>
           <Avatar className= {classes.whiteDaisy} src={whiteDaisy} alt="mountain" />
           <MediaCard/>
         </Grid>
 
-        <Grid item xs>
+        <Grid item xs={12} sm={9}>
           <img className= {classes.mounatin} src={mountain} alt="mountain"/>
           <SimpleTabs/>
         </Grid>
@@ -63,7 +72,7 @@ function MediaCard() {
           <Typography className={classes.card} color="textSecondary" component="p">position</Typography>       
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions className={classes.postComment} >
         <div className="post-comment clearfix">
           <div className="post">
             <div><p>Posts</p></div>

@@ -1,88 +1,107 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Grid from "@material-ui/core/Grid";
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from "@material-ui/core/styles";
+import ProfileEditBasic from './profileBasic/profileEditBasic.jsx'
+import ProfileEditWork from './profileWork/profileEditWork.jsx'
+import WithProfileHeaderHOC from  './profileHeaderHoc.jsx'
+import WithProfileDataHOC from  './profileDataHoc.jsx'
+import { Paper } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
-  root: { flexGrow: 1},
-  grid: { marginTop: 20, marginLeft: 30},
-  basicInfo: { marginTop: 20 }  
-}));
+const styles = theme => ({  
+  paper: { paddingTop: 10,
+    paddingBottom: 10,
+  },
+}); 
 
-const Profile = () => {
-  const classes = useStyles();
-  console.log("in profile com");
+class Profile extends React.Component { 
+  constructor(props) {
+		super(props);
+		this.state = {
+      editBasic: '',
+      editWork: '',
+		};
+    this.getEditBasicData = this.getEditBasicData.bind(this);
+    this.getEditWorkData = this.getEditWorkData.bind(this);
+    this.getEditState = this.getEditState.bind(this);
+  } 
   
-  return (    
-    <div className={classes.root}> 
-      <AppBar className={classes.basicInfo} position="static" color="default">
-        <Toolbar> 
-          <Grid container justify={"flex-start"}>  Basic Information </Grid>
-          <Grid container justify={"flex-end"}>  <button  type="button">Edit  </button> </Grid>
-         </Toolbar>
-      </AppBar> 
-
-      <Paper>
-        <Grid container spacing={1}> 
-            <ProfileData name="Name" data="Raj Kundra" />
-            <ProfileData name="Gender" data="Male" />
-            <ProfileData name="BirthDate" data="N/A" />
-            <ProfileData name="Marital Status" data="N/A" />
-            <ProfileData name="Mobile" data="9087654321" />
-          {/* <Grid container item xs={12} className={classes.grid}>
-            <Grid container item  xs={2} sm={2}> Name :</Grid >
-            <Grid container item  xs={10} sm={10}>  Raj Kundra</Grid>
-          </Grid>
-
-          <Grid container item xs={12} className={classes.grid}>
-            <Grid container item  xs={2} sm={2}> Gender :</Grid >
-            <Grid container item  xs={10} sm={10}> Male</Grid>
-          </Grid>
-
-          <Grid container item xs={12} className={classes.grid}>
-            <Grid container item  xs={2} sm={2}> BirthDate :</Grid >
-            <Grid container item  xs={10} sm={10}> N/A</Grid>
-          </Grid>
-
-          <Grid container item xs={12} className={classes.grid}>
-            <Grid container item  xs={2} sm={2}> Marital Status :</Grid >
-            <Grid container item  xs={10} sm={10}> N/A </Grid>
-          </Grid>
-
-          <Grid container item xs={12} className={classes.grid}>
-            <Grid container item  xs={2} sm={2}> Mobile :</Grid >
-            <Grid container item  xs={10} sm={10}> 9087654321 </Grid>
-          </Grid> */}
-
-        </Grid>
-      </Paper> 
-    </div>         
-  );
-};
-
-export default Profile; 
-
-const DisplayData = ({ name , data}) => { 
-  const classes = useStyles();
-  return (
-    <Grid container item xs={12} className={classes.grid}>
-      <Grid container item  xs={2} sm={2}> {name} :</Grid >
-      <Grid container item  xs={10} sm={10}> {data} </Grid>
-    </Grid>
-  );
-};
-
-function profileHOC(WrappedComponent) {
-  return class extends React.Component{
-    render() {
-      return <WrappedComponent {...this.props}/>;
+  getEditState(editEvent, title) {
+    console.log(editEvent); 
+    console.log("edit data"+ title); 
+    if(title === 'Basic Information') {
+      this.setState({    
+        editBasic: editEvent,
+      });
+    } else if(title === 'Work Information') {
+      this.setState({    
+        editWork: editEvent,
+      });
     }
-  }
-}
+  } 
 
-const ProfileData = profileHOC(DisplayData);
+  getEditBasicData(e) {
+    console.log(e); 
+    this.setState({    
+			editBasic: false,
+		});
+  } 
 
+  getEditWorkData(e) {
+    console.log(e); 
+    this.setState({    
+			editWork: false,
+		});
+  } 
+ 
+  render() { 
+    const { classes } = this.props;
+    let profileBasicComponent;
+    let profileWorkComponent;
+    const basic = [
+      {id: 1, name: 'Name', data: 'Raj Kundra'}, 
+      {id: 2, name: 'Gender', data: 'Male' },
+      {id: 3, name: 'BirthDate', data: 'N/A' },
+      {id: 4, name: 'Marital Status', data: 'N/A' },
+      {id: 5, name: 'Mobile', data: '9087654321' },
+    ];
 
+    const work = [
+      {id: 1, name: 'Profile', data: 'Frontend'}, 
+      {id: 2, name: 'Skills', data: 'Angular' },
+    ];
 
+   if (this.state.editBasic) {
+			profileBasicComponent = < ProfileEditBasic profileEditBasic={this.getEditBasicData}/>;
+		} else {
+			profileBasicComponent = <> 
+        <WithProfileHeaderHOC title="Basic Information" HeaderTest={(editEvent, title) => this.getEditState(editEvent, title)}/>  
+          <Paper className={classes.paper} > 
+            {basic.map((basic) => (
+              < WithProfileDataHOC key={basic.id}  name={basic.name} data={basic.data} />
+            ))} 
+          </Paper>           
+      </>
+    }
+
+    if (this.state.editWork) {
+			profileWorkComponent = < ProfileEditWork profileEditWork={this.getEditWorkData}/>;
+		} else {
+			profileWorkComponent = <> 
+        <WithProfileHeaderHOC title="Work Information" HeaderTest={(editEvent, title) => this.getEditState(editEvent, title)}/> 
+        <Paper className={classes.paper}>
+         {work.map((work) => (
+          < WithProfileDataHOC key={work.id}  name={work.name} data={work.data} />
+         ))} 
+        </Paper>           
+      </>
+    }
+  
+    return ( 
+      <>  
+        {profileBasicComponent}  
+        {profileWorkComponent}
+      </>      
+    );
+  }  
+} 
+
+export default withStyles(styles)(Profile);

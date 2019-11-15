@@ -4,15 +4,46 @@ import Container from "./Components/Container/container.jsx"
 import './App.scss'; 
 import { BrowserRouter as Router} from "react-router-dom";
 
-export default function App () {
-  return (
-    <Router>
-      <div className="App">
-        <div className="container-fluid">
-          <Header />
-          <Container /> 
-        </div> 
-      </div>
-    </Router>  
-  );   
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {  
+      logout: '',
+    }
+    this.getLogout = this.getLogout.bind(this);
+    this.updateLogout = this.updateLogout.bind(this);
+  } 
+
+  getLogout = (e) => {  
+    this.setState({
+      logout: e
+    });  
+  } 
+
+  updateLogout = (e) => {
+    console.log("hello logout"); 
+    this.setState({
+      logout: !e
+    });
+    const userDetails = JSON.parse(localStorage.getItem('PersonDetail')); 
+    for (var i = 0; i < userDetails.length; i++) {
+        if(userDetails[i].isLoggedIn) {
+          userDetails[i].isLoggedIn = false;
+        } 
+      }
+    localStorage.setItem('PersonDetail', JSON.stringify(userDetails)); 
+  }
+  
+  render() {  
+    return (
+      <Router>
+        <div className="App">
+          <div className="container-fluid"> 
+            <Header logout={this.state.logout} onLogoutUpdate={this.updateLogout}/> 
+            <Container  onLogout={this.getLogout} /> 
+          </div> 
+        </div>
+      </Router>  
+    ); 
+  }  
 }   
