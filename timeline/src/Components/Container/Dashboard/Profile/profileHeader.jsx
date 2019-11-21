@@ -26,7 +26,7 @@ class ProfileHeader extends React.Component {
   render() { 
     const { classes } = this.props;
     return ( 
-      <>     
+      // <>     
         <AppBar position="static" color="default" className={classes.basicInfo} >  
           <Toolbar> 
             <Grid container justify={"flex-start"}> {this.props.title} </Grid>
@@ -35,17 +35,9 @@ class ProfileHeader extends React.Component {
             </Grid>
           </Toolbar>
         </AppBar> 
-      </>      
+      // </>      
     );
   }  
 } 
 
-function WithProfileHeaderHOC(ProfileHeader) {
-  return class extends React.Component{ 
-    render() {  
-      return <ProfileHeader {...this.props}/>;
-    }
-  }
-}
-
-export default WithProfileHeaderHOC(withStyles(styles)(ProfileHeader));
+export default withStyles(styles)(ProfileHeader);

@@ -11,11 +11,11 @@ const useStyles = makeStyles({
 
 const Header = (props) => {
   const classes = useStyles();
-  console.log(props.logout);
+  // console.log(props.logout);
 
   return (
     <nav className={classes.root}>
-      <AppBar position="static" color="default" className={classes.header}>
+      <AppBar position="static" color="default">
         <Toolbar> 
           <img className={classes.logo} src={logo} alt="dashboard Logo"/>
           <Grid container justify={"flex-end"}> 

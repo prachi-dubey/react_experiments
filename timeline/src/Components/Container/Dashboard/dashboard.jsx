@@ -23,13 +23,14 @@ class Dashboard extends React.Component {
 export default Dashboard; 
 
 const useStyles = makeStyles(theme => ({
-  container: { marginTop: 20 },
-  header: { marginTop: 15, },
+  root: { flexGrow: 1},
+  container: { marginTop: 20},
+  header: { marginTop: 15},
   mounatin: { height: 140, width: '100%', position: 'relative'},
   whiteDaisy: { height: 60.54, width: 60, position: 'absolute', top: 198, left: "10.5%" ,
     [theme.breakpoints.down('xs')]: {
-      top: 185,
-      left: "42%"
+      top: 178,
+      left: "40%"
     }
   },
   card: { maxWidth: 345, textAlign: 'center'},
@@ -39,23 +40,31 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('xs')]: {
       marginLeft: 50
     }
+  },
+  space: {
+    marginLeft: 8,
+    marginRight: 8,
   }
 }));
     
 const WebPage = () => {
   const classes = useStyles(); 
   return ( 
-    <div>
-      <Grid className= {classes.container} container spacing={2}>
+    <div className={classes.root}>
+      <Grid className= {classes.container} container>
         <Grid item xs={12} sm={3}>
-          <img className= {classes.mounatin} src={mountain} alt="mountain"/>
-          <Avatar className= {classes.whiteDaisy} src={whiteDaisy} alt="mountain" />
-          <MediaCard/>
+          <div className= {classes.space}> 
+            <img className= {classes.mounatin} src={mountain} alt="mountain"/>
+            <Avatar className= {classes.whiteDaisy} src={whiteDaisy} alt="mountain" />
+            <MediaCard/>
+          </div>         
         </Grid>
 
-        <Grid item xs={12} sm={9}>
-          <img className= {classes.mounatin} src={mountain} alt="mountain"/>
-          <SimpleTabs/>
+        <Grid  item xs={12} sm={9}> 
+          <div className= {classes.space}>
+            <img className= {classes.mounatin} src={mountain} alt="mountain"/>
+            <SimpleTabs/>
+          </div>          
         </Grid>
       </Grid>      
     </div>
@@ -64,12 +73,21 @@ const WebPage = () => {
 
 function MediaCard() {
   const classes = useStyles();
+  var name = '';
+  var profile = '';
+  const userDetails = JSON.parse(localStorage.getItem('PersonDetail'));
+    for (var i = 0; i < userDetails.length; i++) {
+      if(userDetails[i].isLoggedIn) {     
+        name =  userDetails[i].name;
+        profile =  userDetails[i].profile;      
+      }
+    } 
   return (
     <Card className={classes.card}>
       <CardActionArea>
         <CardContent>
-          <Typography className={classes.header} gutterBottom  component="h2">Name</Typography>
-          <Typography className={classes.card} color="textSecondary" component="p">position</Typography>       
+          <Typography className={classes.header} gutterBottom  component="h2"> {name} </Typography>
+          <Typography className={classes.card} color="textSecondary" component="p"> {profile} </Typography>       
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.postComment} >

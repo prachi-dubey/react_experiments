@@ -14,7 +14,7 @@ export class Login extends React.Component {
     }
   }  
 
-  componentDidMount = () => {  
+  componentDidMount = () => {   
     const userDetails = JSON.parse(localStorage.getItem('PersonDetail'));
     for (var i = 0; i < userDetails.length; i++) {
       console.log(userDetails[i].isLoggedIn); 

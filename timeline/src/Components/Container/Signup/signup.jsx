@@ -9,8 +9,7 @@ export class Signup extends React.Component {
     super(props)
       this.state = {
         userData: {
-          firstname:"", 
-          lastname:"", 
+          name:"",  
           email: "", 
           password: "",
           mobile: "" ,
@@ -55,19 +54,15 @@ export class Signup extends React.Component {
   
   userDataValidation = (values, errors ) => {
     const emailTest = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    const nameTest = /^[a-zA-Z]+$/;
+    const nameTest = /^[a-zA-Z\s]+$/;
     const mobileTest = /^\d{3}-\d{4}-\d{3}$/;
 
-    if ((values.firstname  === "") && (values.firstname.length === 0)) {
-       errors.firstname = "FirstName is required";
-    } else if (!nameTest.test(values.firstname)) {
-        errors.firstname = "Characters only";
+    if ((values.name  === "") && (values.firstname.length === 0)) {
+       errors.name = "FirstName is required";
+    } else if (!nameTest.test(values.name)) {
+        errors.name = "Characters only";
     }
-    if (values.lastname === "") {
-        errors.lastname = "LastName is required";
-    } else if (!nameTest.test(values.lastname)) {
-        errors.lastname = "Characters only";
-    }
+  
     if (values.email === "") {
       errors.email = "Email is required";
     } else if (!emailTest.test(values.email)) {
@@ -113,7 +108,7 @@ export class Signup extends React.Component {
           alert("form submitted");  
           console.log(values);
           this.getUserData(values);
-          resetForm({firstname:'', lastname:'', email:'', password:'',
+          resetForm({name:'', email:'', password:'',
             mobile: '', gender:'', profile:'', skills:[]
           });  
           setSubmitting(false);
@@ -121,8 +116,8 @@ export class Signup extends React.Component {
       >
         {({ touched, errors }) => (
         <Form> 
-          <Field name="firstname" label="firstname" component={TextField} />
-          <Field name="lastname" label="lastname" component={TextField} />
+          <Field name="name" label="name" component={TextField} />
+          {/* <Field name="lastname" label="lastname" component={TextField} /> */}
           <Field name="email" label="email" component={TextField} /> 
           <Field name="password" label="password" component={TextField}/> 
           <Field name="profile" options={[
@@ -161,10 +156,10 @@ export class Signup extends React.Component {
 
           <div value="" className={`form-group ${ touched.skills && errors.skills ? "is-invalid" : ""}`}>
             <label>Skills</label>
-            <div className="checkbox"><Checkbox name="skills" value="Node js" /></div>
+            <div className="checkbox"><Checkbox name="skills" value="Java" /></div>
             <div className="checkbox"><Checkbox name="skills" value="Oracle" /></div>
             <div className="checkbox"><Checkbox name="skills" value="Angular" /></div>
-            <div className="checkbox"><Checkbox name="skills" value="ROR" /></div>
+            <div className="checkbox"><Checkbox name="skills" value="Database" /></div>
             <ErrorMessage component="div" name="skills" className="invalid-feedback"/>
           </div> 
 
