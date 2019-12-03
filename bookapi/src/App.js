@@ -34,9 +34,9 @@ export default class App extends React.Component {
 
   getUserData = (e) => {
     var joined = this.state.storeUserData.concat(e);
-      this.setState({
-        storeUserData: joined
-      });  
+    this.setState({
+      storeUserData: joined
+    });  
   }
 
   componentWillMount = () => {
