@@ -18,7 +18,7 @@ const AntTabs = withStyles({
   indicator: { backgroundColor: '#f5f5f5'}
 })(Tabs);
 
-function SimpleTabs() {
+function DashboardTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -47,4 +47,4 @@ function SimpleTabs() {
   );
 }
 
-export default withRouter(SimpleTabs);
+export default withRouter(DashboardTabs);

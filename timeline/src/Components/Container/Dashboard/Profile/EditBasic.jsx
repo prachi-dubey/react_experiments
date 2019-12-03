@@ -69,7 +69,7 @@ class EditBasic extends React.Component {
     
     return (
       <Paper> 
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}> 
         <Formik 
         enableReinitialize
         initialValues={this.state.editProfile} 

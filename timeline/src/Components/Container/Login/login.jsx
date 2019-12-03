@@ -49,7 +49,7 @@ export class Login extends React.Component {
   render() {
     return (
       <div className="col-md-4 col-md-offset-4 login">
-        <h1>Login form</h1>
+        <h1>Login form</h1> 
         <Formik
           initialValues = { this.state.loginData } 
           validate={ touched => {

@@ -1,6 +1,6 @@
 import React from 'react';  
 import './dashboard.scss'; 
-import SimpleTabs from "./Tabs/tabs.jsx"
+import DashboardTabs from "./Tabs/tabs.jsx"
 import mountain from "../../../assets/mountain.jpg";
 import whiteDaisy from "../../../assets/White-Daisy.jpg";
 import {Typography, Grid, Avatar, Card, CardActionArea, CardActions , CardContent} from '@material-ui/core';
@@ -63,7 +63,7 @@ const WebPage = () => {
         <Grid  item xs={12} sm={9}> 
           <div className= {classes.space}>
             <img className= {classes.mounatin} src={mountain} alt="mountain"/>
-            <SimpleTabs/>
+            <DashboardTabs/>
           </div>          
         </Grid>
       </Grid>      
