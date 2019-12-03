@@ -1,0 +1,33 @@
+$grey: #ccc;
+
+.mounatin {
+  border: solid 2px white;
+  left: 38%;
+  min-height: 20%;
+  min-width: 25%;
+  position: absolute;
+  top: 120px;
+} 
+
+.post-comment {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  .post {
+    margin-left: 12px;
+  }
+  > div {
+    padding-right: 10px;
+  }
+  .comment {
+    padding-left: 10px;
+  }
+  > div {
+    border-right: 1px solid $grey;
+    float: left;
+    text-align: center;
+  }
+  > div:last-child {
+    border-right: none;
+  }
+}
